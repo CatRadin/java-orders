@@ -1,13 +1,13 @@
-package com.lambdaschool.modelingorders;
+package com.lambdaschool.orders.services;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ModelingordersApplication {
+public class OrdersApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ModelingordersApplication.class, args);
+        SpringApplication.run(OrdersApplication.class, args);
     }
 
 }
