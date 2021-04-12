@@ -1,6 +1,9 @@
 package com.lambdaschool.orders.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.util.HashSet;
 
 //Entity allows interaction with the orders table
 @Entity
@@ -13,9 +16,87 @@ public class Order
     private long ordnum;
 
     //Fields-----------------------------------------------------------------------
-        //these become columns & are all lowercase so they are easier to work with.
+    //these become columns & are all lowercase so they are easier to work with.
     private double ordamount;
     private double advanceamount;
     private String orderdescription;
 
+    //Join Tables------------------------------------------------------------------
+
+    //Joins orders and payments in a many to many relationship.
+    @ManyToMany()
+    @JoinTable(name = "orderspayments",
+            joinColumns = @JoinColumn(name = "ordnum"),
+            inverseJoinColumns = @JoinColumn(name = "paymentid"))
+    @JsonIgnoreProperties("orders")
+    Set<Payment> payments = new HashSet<>(); //A set forces us to have unique values!~
+
+    //A many to many relationship with the customer table. Many orders to one customer.
+    @ManyToOne
+    @JoinColumn(name = "custcode",
+            nullable = false)
+    @JsonIgnoreProperties("orders")
+    private Customer customer;
+
+    //Default constructor -------------------------------------------------------------
+    public Order() {
+    }
+    //"Single" constructor -----------------------------------------------------------
+
+    public Order(double ordamount, double advanceamount, Customer customer, String orderdescription) {
+        this.ordamount = ordamount;
+        this.advanceamount = advanceamount;
+        this.customer = customer;
+        this.orderdescription = orderdescription;
+    }
+
+    //Getters & Setters ------------------------------------------------------------------
+
+    public long getOrdnum() {
+        return ordnum;
+    }
+
+    public void setOrdnum(long ordnum) {
+        this.ordnum = ordnum;
+    }
+
+    public double getOrdamount() {
+        return ordamount;
+    }
+
+    public void setOrdamount(double ordamount) {
+        this.ordamount = ordamount;
+    }
+
+    public double getAdvanceamount() {
+        return advanceamount;
+    }
+
+    public void setAdvanceamount(double advanceamount) {
+        this.advanceamount = advanceamount;
+    }
+
+    public String getOrderdescription() {
+        return orderdescription;
+    }
+
+    public void setOrderdescription(String orderdescription) {
+        this.orderdescription = orderdescription;
+    }
+
+    public Set<Payment> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(Set<Payment> payments) {
+        this.payments = payments;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 }
