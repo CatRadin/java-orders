@@ -1,9 +1,11 @@
 package com.lambdaschool.orders.models;
 
+import com.lambdaschool.orders.models.Paymentt;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Set;
 
 //Entity allows interaction with the orders table
 @Entity
@@ -24,12 +26,11 @@ public class Order
     //Join Tables------------------------------------------------------------------
 
     //Joins orders and payments in a many to many relationship.
-    @ManyToMany()
+    @ManyToMany
     @JoinTable(name = "orderspayments",
-            joinColumns = @JoinColumn(name = "ordnum"),
+            joinColumns = @JoinColumn(name ="ordernum"),
             inverseJoinColumns = @JoinColumn(name = "paymentid"))
-    @JsonIgnoreProperties("orders")
-    Set<Payment> payments = new HashSet<>(); //A set forces us to have unique values!~
+    Set<Paymentt>payments = new HashSet<>(); //A set forces us to have unique values!~
 
     //A many to many relationship with the customer table. Many orders to one customer.
     @ManyToOne
@@ -43,12 +44,14 @@ public class Order
     }
     //"Single" constructor -----------------------------------------------------------
 
-    public Order(double ordamount, double advanceamount, Customer customer, String orderdescription) {
+    public Order(double ordamount, double advanceamount, String orderdescription, Set<Paymentt> payments, Customer customer) {
         this.ordamount = ordamount;
         this.advanceamount = advanceamount;
-        this.customer = customer;
         this.orderdescription = orderdescription;
+        this.payments = payments;
+        this.customer = customer;
     }
+
 
     //Getters & Setters ------------------------------------------------------------------
 
@@ -84,11 +87,11 @@ public class Order
         this.orderdescription = orderdescription;
     }
 
-    public Set<Payment> getPayments() {
+    public Set<Paymentt> getPayments() {
         return payments;
     }
 
-    public void setPayments(Set<Payment> payments) {
+    public void setPayments(Set<Paymentt> payments) {
         this.payments = payments;
     }
 
