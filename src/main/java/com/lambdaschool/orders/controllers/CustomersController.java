@@ -1,6 +1,7 @@
 package com.lambdaschool.orders.controllers;
 
 import com.lambdaschool.orders.models.Customer;
+import com.lambdaschool.orders.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
