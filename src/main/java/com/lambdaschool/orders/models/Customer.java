@@ -40,7 +40,7 @@ public class Customer
     @OneToMany(mappedBy = "customer",
         cascade = CascadeType.ALL,
     orphanRemoval = true)
-    @JsonIgnoreProperties(value = "customer",
+    @JsonIgnoreProperties(value = "customer",//This will stop the infinate loop of reading data
         allowSetters = true)
     private List<Order> orders = new ArrayList<>();
 

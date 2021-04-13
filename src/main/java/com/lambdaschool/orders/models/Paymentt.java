@@ -22,7 +22,7 @@ public class Paymentt
 
     //Join Tables -----------------------------------------------
     @ManyToMany(mappedBy = "payments")
-    @JsonIgnoreProperties("payments")
+    @JsonIgnoreProperties(value = "payments", allowSetters = true)
     private Set<Order> orders = new HashSet<>();
 
     //Default Constructor ---------------------------------------

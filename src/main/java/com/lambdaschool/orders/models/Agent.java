@@ -28,7 +28,7 @@ public class Agent
     @OneToMany(mappedBy = "agent", // When you do mapped by it must match a field that is in customer!
         cascade = CascadeType.ALL,
         orphanRemoval = true)
-    @JsonIgnoreProperties(value = "agent",
+    @JsonIgnoreProperties(value = "agent", //This will stop the infinate loop of reading data
         allowSetters = true)
     private List<Customer> customers = new ArrayList<>();
 

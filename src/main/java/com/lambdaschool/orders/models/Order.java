@@ -36,7 +36,7 @@ public class Order
     @ManyToOne
     @JoinColumn(name = "custcode",
             nullable = false)
-    @JsonIgnoreProperties("orders")
+    @JsonIgnoreProperties(value = "orders", allowSetters = false)
     private Customer customer;
 
     //Default constructor -------------------------------------------------------------
