@@ -32,4 +32,9 @@ public class CustomerServiceImpl implements CustomerService{
     public Customer findCustomersById(Long id) {
         return null;
     }
+
+    @Override
+    public Customer findCustomerById(long custid) {
+        return null;
+    }
 }
